@@ -1,15 +1,44 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import AuthStore from '@/modules/auth/auth.store'
+
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
+const state = {
+  isConnected: false,
+  socketMessage: ''
+}
+
+const mutations = {
+  SOCKET_connect (state) {
+    state.isConnected = true
   },
-  mutations: {
+  SOCKET_disconnect (state) {
+    state.isConnected = false
   },
-  actions: {
+  SOCKET_messagechannel (state, message) {
+    state.socketMessage = message
   },
-  modules: {
+  DISCONNECT (state) {
+    this._vm.$socket.close()
   }
+}
+
+const actions = {
+  disconnect ({ commit }) {
+    commit('DISCONNECT')
+  }
+}
+
+const getters = {}
+
+export default new Vuex.Store({
+  modules: {
+    AuthStore
+  },
+  state,
+  mutations,
+  actions,
+  getters
 })
