@@ -5,7 +5,7 @@ import store from './store'
 import io from 'socket.io-client'
 import VueSocketIO from 'vue-socket.io'
 
-export const SocketInstance = io('http://localhost:4113')
+export const SocketInstance = io('http://api.project-zero.devhousestudios.com.br/')
 
 Vue.use(new VueSocketIO({
   debug: true,
